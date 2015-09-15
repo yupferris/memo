@@ -3,13 +3,62 @@
 		<StatusBarBackground DockPanel.Dock="Top" />
 
 		<JavaScript>
+			var Observable = require("FuseJS/Observable");
+
+			var memos = Observable();
+
+			var current_text = Observable("");
+
+			function submit() {
+				var memo = {
+					text: current_text.value,
+					remove: function() {
+						memos.remove(memo);
+					}
+				};
+				memos.add(memo);
+				current_text.value = "";
+				//debug_log(current_text.value);
+			}
+
+			module.exports = {
+				memos: memos,
+				current_text: current_text,
+				submit: submit
+			};
 		</JavaScript>
 
 		<ScrollViewer ClipToBounds="true">
+			<Style>
+				<Button>
+					<WhilePressed>
+						<Scale Factor=".8" Duration=".2" Easing="BounceOut" EasingBack="BounceIn" />
+					</WhilePressed>
+				</Button>
+			</Style>
+
 			<StackPanel>
-				<Slider />
-				<Button Text="Button" />
-				<Switch Alignment="Left" />
+				<StackPanel>
+					<Each Items="{memos}">
+						<DockPanel>
+							<Button Text="Remove" Clicked="{remove}" Dock="Right" />
+							<Text Value="{text}" />
+
+							<AddingAnimation>
+								<Move RelativeTo="Size" X="1" Duration=".4" Easing="BounceIn" />
+							</AddingAnimation>
+
+							<RemovingAnimation>
+								<Move RelativeTo="Size" X="1" Duration=".4" Easing="BounceOut" />
+							</RemovingAnimation>
+						</DockPanel>
+					</Each>
+				</StackPanel>
+
+				<StackPanel>
+					<TextInput Value="{current_text}" />
+					<Button Text="Add" Clicked="{submit}" />
+				</StackPanel>
 			</StackPanel>
 		</ScrollViewer>
 	</DockPanel>
