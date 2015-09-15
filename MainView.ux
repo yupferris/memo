@@ -1,0 +1,16 @@
+<App Theme="Basic" ClearColor="#eeeeeeff">
+	<DockPanel>
+		<StatusBarBackground DockPanel.Dock="Top" />
+
+		<JavaScript>
+		</JavaScript>
+
+		<ScrollViewer ClipToBounds="true">
+			<StackPanel>
+				<Slider />
+				<Button Text="Button" />
+				<Switch Alignment="Left" />
+			</StackPanel>
+		</ScrollViewer>
+	</DockPanel>
+</App>
