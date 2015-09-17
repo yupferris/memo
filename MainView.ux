@@ -42,7 +42,7 @@
 					<Each Items="{memos}">
 						<DockPanel>
 							<Button Text="Remove" Clicked="{remove}" Dock="Right" />
-							<Text Value="{text}" />
+							<Text Value="{text}" Margin="5,0,0,0" Alignment="CenterLeft" />
 
 							<AddingAnimation>
 								<Move RelativeTo="Size" X="1" Duration=".4" Easing="BounceIn" />
